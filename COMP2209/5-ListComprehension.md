@@ -30,3 +30,11 @@ zip _ [] = []
 zip (x:xs) (y:ys) = (x,y) : zip xs ys
 ```
 
+## General Form
+
+``` haskell
+[ exp | qual1, qual2, ..., qualn]
+```
+
+where exp is any expression and qual is one of pattern <- exp, exp where a guard is needed or a let declaration for locally declared values.
+

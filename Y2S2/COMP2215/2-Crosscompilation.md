@@ -53,11 +53,10 @@ The compiler will assign the program and its data into sections, which takes int
 The linker places the sections into virtual memory.
 The loader places the sections into physical memory.
 
+![](Crosscomp4.png)
+
 C source code has three scopes:
 
 1. Program wide scope
 2. File scope
 3. Block scope (in parentheses { } )
-
-![](Crosscomp4.png)
-

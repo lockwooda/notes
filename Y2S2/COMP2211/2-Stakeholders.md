@@ -1,6 +1,8 @@
 # Stakeholders and Personas
 
-## Stakeholders Analysis
+Talk to your supervisor. Record the feedback. Written feedback is good, but we all say more than we write. Get yourself used to recording those feedback sessions.
+
+## Stakeholder Analysis
 
 Who are the users?
 

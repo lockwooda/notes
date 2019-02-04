@@ -30,11 +30,17 @@ As an academic I want to be able to find all of the papers and patents related t
 Your user stories should be:
 
 * Independent
+  * The PBI should be self-contained, in a way that there is no inherent dependency on another PBI.
 * Negotiable
+  * PBIs are not explicit contracts and should leave space for discussion.
 * Valuable
+  * A PBI must deliver value to the stakeholders.
 * Estimatable
+  * You must always be able to estimate the size of a PBI
 * Small
+  * PBIs should not be so big as to become impossible to plan/task/prioritize within a level of accuracy.
 * Testable
+  * The PBI or its related description must provide the necessary information to make test development possible
 
 Remember the difference between a user story and a use case; a user story calls for a conversation, the use case documents the conversation.
 

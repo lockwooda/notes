@@ -1,5 +1,7 @@
 # User Stories, Sprint Planning and Risk
 
+We are now on the part that we need to think about the requirements that the user will want.
+
 A user story is one or more sentences in everyday/busineess language of the user that captures what the user wants to achieve.
 They are small units of functionality, so make sure that they don't get too large.
 

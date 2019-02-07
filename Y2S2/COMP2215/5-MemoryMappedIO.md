@@ -7,22 +7,33 @@ However, how is software connected to the hardware?
 
 ## Control Registers
 
-They are a set of flip flops that are not only connected for reading and writing. Their inputs or outputs are wired into other circuits. However, how does the CPU interact with the control registers?
+We have two types of fast memory in our system; RAM and registers. Static RAM is technically the same as the CPU, as compared to dynamic RAM which is capacitors that are charged up and discharge. In the registers, you'll firstly have your general registers for calculations and other usages, and then you'll have your I/O registers for input and output.
+Control registers are a set of flip flops that are not only connected for reading and writing. Their inputs or outputs are wired into other circuits. 
 
+However, how does the CPU interact with the control registers?
 There are two ways:
 
 * I/O Instructions
-  * An instruction set of the processor has I/O commands
+  * An instruction set of the processor has special I/O commands
   * I/O commands control I/O port registers
+  * Much more restrictive than memory mapped I/O
 * Memory Mapped I/O
   * I/O registers have addresses in reserved memory space
   * Therefore has memory access
 
-When choosing one of the two methods, you should consider the size of address space, the convenience of access (different addressing modes), the size of the instruction set (as instruction bits are precious) and possible cache complications.
+When choosing one of the two methods, you should consider:
+
+* the size of address space
+* the convenience of access 
+  * (different addressing modes)
+* the size of the instruction set 
+  * (as instruction bits are precious)
+* possible cache complications
+  * (can get cached values back rather than actual pin!)
 
 ## AT90USB1286
 
-C assumes a single address space (von Neumann). The intended address space is indicated to the linker by a specific big offset.
+C assumes a single address space (von Neumann). Therefore, we need a work-around for this. The work-around is that the intended address space is indicated to the linker by a specific big offset.
 
 ![](MemoryMappedIO2.png)
 

@@ -6,9 +6,11 @@ Given a string, does there exist a derivation in the grammar of the language?
 
 Lexing is essentially pattern matching on some text. We will be identifying the tokens in a string and then interface this with a parser.
 
+We break the string up into so called tokens (or sometimes called lexems). These contain reserved words of the language.
+
 ![](LexingParsing1.png)
 
-The tokens are identified using regular expressions. A lexr constructs an automaton, which is executed as the individual characters are read into the lexer.
+The tokens are identified using regular expressions. A lexer constructs an automaton, which is executed as the individual characters are read into the lexer. The power of a regex is the same as the power of a finite automaton.
 
 ## Parsing
 

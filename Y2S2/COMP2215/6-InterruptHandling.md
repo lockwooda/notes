@@ -24,11 +24,11 @@ Software will disable any interrupts, saves some additional states (such as regi
 The procedure executed when interrupts occur and that handle the interrupt.
 
 1. Keep them fast!
-   * Avoid loops, heavy instructions, and should not block the CPU
+   * Avoid loops, heavy instructions (e.g. printf()), and should not block the CPU (e.g. scanf())
    * Life simpler if you make your ISR uninterruptable
      * No worries about stack depth
      * No overhead for re-entrant code
-     * Some latency
+     * Do not want latency
      * Lost interrupts!
    * Move data that needs processing to some buffer, set global flag, return immediately
    * Check flag in main loop and do work there
@@ -37,11 +37,15 @@ The procedure executed when interrupts occur and that handle the interrupt.
 
 ## Latency
 
-How long does it take until the CPU can respond, and is this delay deterministic?
+Delay between getting a signal and acting on it.
+
+How long does it take until the CPU can respond (guarantee it will take no longer than a set amount of time), and is this delay deterministic (particularly important in a control algorithms)? 
 
 We can have latency due to hardware (current instruction completion, saving states), as well as latency due to software (saving states, max length of critical sections to disable interrupts).
 
 ## Jitter
+
+Varience of the delay.
 
 Instructions cannot be interrupted. They must be allowed to be executed. Some instructions take more than one clock cycle to complete. The response time depends upon the instruction being executed whilst the interrupt arrives.
 

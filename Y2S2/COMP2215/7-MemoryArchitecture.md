@@ -67,3 +67,23 @@ RAM is not taken up by global vars and the local static vars are shared dynamica
 * Stack
   * Required for function calls (stack frame for local variables, return address)
   * Starts at top of RAM, grows down.
+
+There can be collisions on the heap or stack. For instance, on the stack, recursive function calls, large local variables or many local variables can cause collisions. With heap growth, watch out for heap fragmentation (where the largest free space left is smaller than the size of a variable) and for libraries that will be in the heap.
+
+## Memory in C
+
+You can request memory from the heap using malloc(size). You should check whether the memory has been granted; malloc returns the pointer to assigned memory, or a null pointer if it is out of memory. If so, you can use free() to return memory to the heap. It is okay to use free(NULL).
+
+Calls to malloc are relatively slow. No checks are made, as it would waste cycles most of the time. Memory alloc is critical to performance.
+
+### Handling Memory
+
+* Always check whether memory was granted before using
+* Free the memory you have been assigned as early as possible
+* Only call free on addresses you are in charge of
+
+Not adhearing to the rules lead to:
+
+* Immediate crashes in the best case
+* Random crashes
+* Memory leaks

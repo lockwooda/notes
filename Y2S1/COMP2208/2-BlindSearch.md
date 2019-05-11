@@ -39,5 +39,5 @@ A solution is a sequence of actions leading from the initial state to a goal sta
 
 Offline, simulated exploration of state space by generating successors of already-explored states
 
-![blindsearch1.png](Yes)
+![](blindsearch1.png)
 

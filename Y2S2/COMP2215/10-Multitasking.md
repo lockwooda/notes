@@ -77,4 +77,53 @@ It is easy to share the CPU, but not guaranteed.
 
 A minimalist but practical scheduler, with fixed priorities, preemptive multitasking and bounded stack usage all in roughly twenty lines of C.
 
-Tasks execute within an ISR. The preemption means it is reentrant, with nested interrupt which maintains its own stack of running tasks. Although, one should be careful with printf. However, there is no self-preemption. The stack depth is bounded by the total number of tasks, with the highest priority task in the stack always on top.
+Tasks execute within an ISR. The pre-emption means it is re-entrant, with nested interrupt which maintains its own stack of running tasks. Although, one should be careful with printf. However, there is no self-pre-emption. The stack depth is bounded by the total number of tasks, with the highest priority task in the stack always on top.
+
+### Tasks
+
+```c
+typedef struct task {
+    uint8_t running; 		/* 1 -> running */
+    int state;				/* for user */
+    uint32_t period;		
+    uint32_t elapsedTime;	/* last running */
+    int (*TickFct)(int);	/* pointer to tsk */
+} task;
+
+uint8_t runningTasks[MAX_TASKS + 1] = {255};
+const uint32_t idleTask = 255;
+uint8_t currentTask = 0;
+```
+
+
+
+### Scheduling Loop
+
+``` c
+for (i = 0 ; i <= tasksNum ; i++) {
+    if((tasks[i].elapsedTime >= tasks[i].period))
+        && (runningTasks[currentTask] > i)
+        && (!tasks[i].running) {
+        ...
+    }
+    tasks[i].elapsedTime += tasksPeriodGCD;
+}
+```
+
+### User Space
+
+``` c
+tasks[i].state = tasks[i].TickFct(tasks[i].state);
+```
+
+### Task Management
+
+``` c
+cli();
+tasks[i].elaspedTime = 0;
+tasks[i].running = 1;
+currentTask += 1;
+runningTasks[currentTask] = i;
+sei();
+```
+

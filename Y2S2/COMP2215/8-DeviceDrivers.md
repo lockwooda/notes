@@ -20,6 +20,20 @@ Operating Systems:
   * Desired: networking, communications amongst users/processes
   * Undesired: protection and security
 
+## Uniform Interface
+
+We need a uniform interface for device class or system:
+
+* PC
+  * Terminal
+  * Keyboard
+  * Hard drive
+* Embedded
+  * Serial port?
+  * Memory card?
+
+In contrast to a PC where minimum of I/O hardware guaranteed, for embedded the hardware config varies. If a type of I/O exists, a standardized form of access can be provided.
+
 ![](Drivers1.png)
 
 ## Application Interface
@@ -79,3 +93,9 @@ Start with the data sheet. What commands are available? Is there any sample code
 
 Low-level hardware develops very quickly. To make high volume hardware, it must be highly adaptable. This makes it more complex to configure. The documentation for this is often very poor and the sample code is generally poor.
 Chips can also be substituted for other variants and the chips can have bugs on them.
+
+While unconnected, electronics can be sensitive to electrostatics. Touch a metal case before handling or wrap it in aluminium foil when placing it into storage.
+
+Never reverse the polarity on a power supply line.
+
+If the microcontroller and the module run on different voltages, check whether extra circuitry is required.

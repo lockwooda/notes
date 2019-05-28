@@ -34,16 +34,19 @@ Slow writes impact performance and need to be considered from a reliability pers
 * Fast cell-level read
 * Block writing
 * Write requires erasing beforehand
-* Limited number of writes
+* Limited number of writes (approximately 100,000)
 
 ### EEPROM
 
 * Non-volatile
 * Cell-level read
 * Cell-level write
-* Limited number of writes
+* Limited number of writes (approximately 100,000)
 
 In program memory (flash), the low addresses will have the interrupt vector table.
+
+Flash, RAM and EEPROM memory all have address spaces starting at $0000.
+![](Memory4.png)
 
 ### RAM Layout
 
@@ -52,7 +55,7 @@ In program memory (flash), the low addresses will have the interrupt vector tabl
 * .data
   * Initialised global variables
 * .bss
-  * Unintialised global variables
+  * Uninitialized global variables
 * .heap
 * .stack
   * These two are very important!
@@ -72,7 +75,7 @@ There can be collisions on the heap or stack. For instance, on the stack, recurs
 
 ## Memory in C
 
-You can request memory from the heap using malloc(size). You should check whether the memory has been granted; malloc returns the pointer to assigned memory, or a null pointer if it is out of memory. If so, you can use free() to return memory to the heap. It is okay to use free(NULL).
+You can request memory from the heap using `malloc(size)`. You should check whether the memory has been granted; `malloc()` returns the pointer to assigned memory, or a `NULL` pointer if it is out of memory. If so, you can use `free()` to return memory to the heap. It is okay to use `free(NULL)`.
 
 Calls to malloc are relatively slow. No checks are made, as it would waste cycles most of the time. Memory alloc is critical to performance.
 

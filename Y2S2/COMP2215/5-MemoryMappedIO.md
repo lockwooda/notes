@@ -38,7 +38,7 @@ C assumes a single address space (von Neumann). Therefore, we need a work-around
 ![](MemoryMappedIO2.png)
 
 All hardware modules on microcontroller configured by writing to I/O registers.
-All communication to and most from these modules is faciliated by reading/writing I/O registers.
+All communication to and most from these modules is facilitated by reading/writing I/O registers. Even GPIO registers mapped into memory address space.
 
 There are three main registers for each set of pins:
 
@@ -46,7 +46,7 @@ There are three main registers for each set of pins:
 * DDR* - Port * Data Direction Register
 * PIN* - Port * Input Pins Address
 
-We can use the io.h header file to define constant labels for the correct addresses for the registers on the target chip. They are 8-bit unsigned int registers.
+We can use the io.h header file to define constant labels for the correct addresses for the registers on the target chip. They are 8-bit unsigned int registers, using type `uint8_t`.
 
 For example, to set PB7 as 1 in the DDRB, you do the following:
 

@@ -46,7 +46,7 @@ We can set two types of priorty:
 
 It is simple (the code, and its changes later in development, are easy to verify) and well understood, leading to confidence in its behaviour. The optimal FP scheme is Rate Monotonic Scheduling.
 
-### Rate Monotonic Scheduling
+## Rate Monotonic Scheduling
 
 The requirements:
 

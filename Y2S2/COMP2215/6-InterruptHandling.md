@@ -15,6 +15,13 @@ The state of the interrupted process must be preserved.
 
 ![](Interrupt1.png)
 
+### Precise Interrupt
+
+1. State of PC preserved
+2. Everything before PC fully executed
+3. Nothing beyond PC started
+4. Execution state of instruction at PC known
+
 The processor completes its current instruction, acknowledges the interrupt, the hardware saves some state (the program counter and process status word), and then the PC register is loaded with the value from the interrupt vector table.
 
 Software will disable any interrupts, saves some additional states (such as registers, which is saved to the stack), it may then re-enable interrupts, it will then service the interrupt through the interrupt service routine, restore the state, enable interrupts and the restore the PC and PSW.
@@ -28,8 +35,8 @@ The procedure executed when interrupts occur and that handle the interrupt.
    * Life simpler if you make your ISR uninterruptable
      * No worries about stack depth
      * No overhead for re-entrant code
-     * Do not want latency
-     * Lost interrupts!
+     * Has latency
+     * Can lead to lost interrupts
    * Move data that needs processing to some buffer, set global flag, return immediately
    * Check flag in main loop and do work there
 2. Keep them simple
@@ -39,7 +46,9 @@ The procedure executed when interrupts occur and that handle the interrupt.
 
 Delay between getting a signal and acting on it.
 
-How long does it take until the CPU can respond (guarantee it will take no longer than a set amount of time), and is this delay deterministic (particularly important in a control algorithms)? 
+How long does it take until the CPU can respond (guarantee it will take no longer than a set amount of time), and is this delay deterministic (particularly important in a control algorithms)?
+
+Deterministic latency important in real-time applications. For example, human operations/control algorithms can adapt to deterministic latency, but struggle with random delay.
 
 We can have latency due to hardware (current instruction completion, saving states), as well as latency due to software (saving states, max length of critical sections to disable interrupts).
 
@@ -71,7 +80,13 @@ Is there a deadline for servicing an event? What is the cost if missed, and what
 
 What if the longest time interrupts are disabled? How does this impact on other realtime code?
 
-A variable used in the ISR and the main program may need to be declared volatile, to let the compiler know not to cache it in a register. It turns off optimisation for a varaible. If volatile var is used lots in ISR, copy to local variable.
+## Interrupt Vectors
+
+Different interrupt sources have different vectors. Each is associated with an ISR. Needs to be ISR for every interrupt source that is enabled. For processor to know where to branch, there is a table at start of program memory with interrupt vector address of the ISR for each source.
+
+A variable used in the ISR and the main program may need to be declared volatile, to let the compiler know not to cache it in a register. Multi-byte variables need to be accessed atomically outside of the ISR. It turns off optimisation for a variable, making it slow in comparison to other variables. If a volatile variable is used lots in ISR, copy to local variable.
+
+Operations on registers that are used by the ISR and the main program need to be atomic, which means that they complete without an interruption.
 
 For AVR, you should:
 
@@ -79,3 +94,11 @@ For AVR, you should:
 2. Enable the interrupt at a device level
 3. Globally enable interrupts
 
+### `avrlibc`'s interrupt API
+
+It facilitates the registering of ISRs, including prologue and epilogue
+`(reti();)`
+
+Switching on and off of global interrupts allowed.
+
+By default, if an ISR is undefined, reset the chip.

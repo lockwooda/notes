@@ -10,6 +10,11 @@ Assume we can build failure detectors.
 
 Service that processes queries regarding process failure. Uses local failure detectors, one for each process.
 
+Processes only fail by crashing. No arbitrary failures!
+
+Assume a reliable communications channel between processes - eventually delivered messages.
+Failed links eventually repaired or circumnavigated.
+
 ### Unreliable Detectors
 
 Return hints: Unsuspected and Suspected

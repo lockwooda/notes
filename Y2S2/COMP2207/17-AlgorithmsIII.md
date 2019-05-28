@@ -1,6 +1,6 @@
 # Distributed Algorithms III: Leader Election
 
-Centralised algorithms are simple. We need to choose a leader to undetake special tasks.
+Centralised algorithms are simple, using a central server for mutex, as a sequencer for totally ordered multicasts and as a coordinator for distributed transactions. We need to choose a leader to undertake special tasks.
 All processes must agree on a choice of leader.
 
 We assume that there are N processes with totally ordered identifiers.
